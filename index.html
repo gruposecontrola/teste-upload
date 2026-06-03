@@ -1,0 +1,2641 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Grupo Se Controla</title>
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            height: 100vh;
+            overflow: hidden;
+            background:
+                radial-gradient(circle at center,
+                    #ffffff 0%,
+                    #f8fbff 25%,
+                    #dcecff 65%,
+                    #b5cde9 100%);
+            font-family: Arial, Helvetica, sans-serif;
+        }
+
+        .hero {
+            width: 100%;
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding-top: 0px;
+            position: relative;
+            transform: translateY(-400px);
+            opacity: 1;
+            transition: opacity .55s ease, transform .55s ease;
+        }
+
+        .hero.saindo {
+            opacity: 0;
+            transform: translateY(-430px) scale(.98);
+            pointer-events: none;
+        }
+
+        .hero.entrando {
+            opacity: 1;
+            transform: translateY(-400px) scale(1);
+        }
+
+        .logo {
+            width: 90%;
+            max-width: 1320px;
+            height: auto;
+            object-fit: contain;
+            filter: brightness(0) invert(72%);
+            opacity: .92;
+            z-index: 1;
+        }
+
+        .banda {
+            position: absolute;
+            width: 90%;
+            max-width: 1000px;
+            height: auto;
+            top: 700px;
+            z-index: 2;
+            filter: drop-shadow(0 25px 35px rgba(0, 0, 0, .18));
+        }
+
+        .subtitulo {
+            position: absolute;
+            top: 1700px;
+            width: 100%;
+            text-align: center;
+            font-size: 42px;
+            font-weight: 700;
+            color: #4b5563;
+            letter-spacing: 1px;
+        }
+
+        .descricao {
+            position: absolute;
+            top: 1800px;
+            width: 100%;
+            text-align: center;
+            font-size: 24px;
+            line-height: 1.5;
+            color: #6b7280;
+        }
+
+        .btn-comecar {
+            position: absolute;
+            top: 1950px;
+            padding: 22px 60px;
+            border: none;
+            border-radius: 999px;
+            background: #163a63;
+            color: #ffffff;
+            font-size: 22px;
+            font-weight: 700;
+            cursor: pointer;
+            box-shadow: 0 15px 35px rgba(22, 58, 99, .25);
+            transition: .3s ease;
+        }
+
+        .btn-comecar:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 20px 40px rgba(22, 58, 99, .35);
+        }
+
+        .instagram-link {
+            position: fixed;
+            bottom: 25px;
+            left: 25px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 12px;
+            padding: 12px 18px;
+            border-radius: 999px;
+            background: rgba(255, 255, 255, .25);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, .4);
+            box-shadow: 0 8px 25px rgba(0, 0, 0, .12);
+            transition: .3s ease;
+            z-index: 9999;
+            text-decoration: none;
+        }
+
+        .instagram-link:hover {
+            transform: translateY(-3px) scale(1.03);
+            box-shadow: 0 12px 30px rgba(0, 0, 0, .18);
+        }
+
+        .instagram-link img {
+            width: 42px;
+            height: 42px;
+        }
+
+        .instagram-text {
+            font-size: 20px;
+            font-weight: 700;
+            color: #163a63;
+            letter-spacing: .3px;
+        }
+
+        .etapa {
+            width: 100%;
+            height: 100vh;
+            display: none;
+            align-items: center;
+            justify-content: center;
+            padding: 25px;
+            opacity: 0;
+            transform: translateY(35px) scale(.97);
+            transition: opacity .55s ease, transform .55s ease;
+        }
+
+        .etapa.ativa {
+            display: flex;
+        }
+
+        .etapa.visivel {
+            opacity: 1;
+            transform: translateY(0) scale(1);
+        }
+
+        .etapa.saindo {
+            opacity: 0;
+            transform: translateY(-35px) scale(.97);
+            pointer-events: none;
+        }
+
+        .card-pergunta {
+            width: 100%;
+            max-width: 1350px;
+            min-height: 900px;
+            padding: 100px 90px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            border-radius: 48px;
+            background: rgba(255, 255, 255, .35);
+            backdrop-filter: blur(14px);
+            -webkit-backdrop-filter: blur(14px);
+            border: 1px solid rgba(255, 255, 255, .55);
+            box-shadow: 0 20px 50px rgba(0, 0, 0, .12);
+            text-align: center;
+        }
+
+        .card-pergunta h1 {
+            font-size: 72px;
+            color: #163a63;
+            margin-bottom: 60px;
+        }
+
+        .opcoes {
+            display: flex;
+            flex-direction: column;
+            gap: 30px;
+        }
+
+        .opcao-btn {
+            width: 100%;
+            padding: 38px 40px;
+            border: none;
+            border-radius: 999px;
+            background: #ffffff;
+            color: #163a63;
+            font-size: 36px;
+            font-weight: 700;
+            cursor: pointer;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, .08);
+            transition: .3s ease;
+        }
+
+        .opcao-btn:hover {
+            transform: translateY(-3px);
+            background: #163a63;
+            color: #ffffff;
+            box-shadow: 0 15px 35px rgba(22, 58, 99, .25);
+        }
+
+        .opcao-btn.selecionado {
+            transform: scale(.97);
+            background: #163a63;
+            color: #ffffff;
+        }
+
+        .btn-exemplo {
+
+            background: #163a63;
+            color: white;
+        }
+
+        .btn-exemplo:hover {
+
+            background: #0f2742;
+            color: white;
+        }
+
+        .btn-registro {
+
+            background: #16a34a;
+            color: white;
+        }
+
+        .btn-registro:hover {
+
+            background: #15803d;
+            color: white;
+        }
+
+        .btn-nao {
+
+            background: #dc2626;
+            color: white;
+        }
+
+        .btn-nao:hover {
+
+            background: #b91c1c;
+            color: white;
+        }
+
+        .acoes-funil {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            margin-top: 45px;
+            flex-wrap: wrap;
+        }
+
+        .btn-acao {
+            padding: 18px 35px;
+            border: none;
+            border-radius: 999px;
+            background: #dbe7f5;
+            color: #163a63;
+            font-size: 22px;
+            font-weight: 700;
+            cursor: pointer;
+            transition: .3s ease;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .btn-acao:hover {
+            background: #163a63;
+            color: #ffffff;
+            transform: translateY(-2px);
+        }
+
+        .btn-whatsapp {
+            background: #163a63;
+            color: #ffffff;
+        }
+
+        .btn-upgrade {
+            background: #ffffff;
+            color: #163a63;
+            border: 2px solid rgba(22, 58, 99, .25);
+        }
+
+        .resumo-orcamento {
+            display: flex;
+            flex-direction: column;
+            gap: 18px;
+            margin-bottom: 35px;
+            font-size: 30px;
+            color: #4b5563;
+            font-weight: 700;
+        }
+
+        .linha-orcamento {
+            display: flex;
+            justify-content: space-between;
+            gap: 30px;
+            padding: 18px 30px;
+            border-radius: 22px;
+            background: rgba(255, 255, 255, .55);
+        }
+
+        .valor-final {
+            margin-top: 15px;
+            font-size: 76px;
+            font-weight: 900;
+            color: #163a63;
+        }
+
+        .observacao {
+            margin-top: 20px;
+            font-size: 22px;
+            color: #6b7280;
+            line-height: 1.5;
+        }
+
+        .form-evento {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 24px;
+            width: 100%;
+        }
+
+        .campo-form {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            text-align: left;
+        }
+
+        .campo-form label {
+            font-size: 22px;
+            font-weight: 800;
+            color: #163a63;
+        }
+
+        .campo-form input {
+            width: 100%;
+            padding: 24px 28px;
+            border: none;
+            border-radius: 22px;
+            background: rgba(255, 255, 255, .75);
+            color: #163a63;
+            font-size: 24px;
+            font-weight: 700;
+            outline: none;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, .08);
+            transition: .3s ease;
+        }
+
+        .campo-form input:focus {
+            box-shadow: 0 12px 30px rgba(22, 58, 99, .22);
+            transform: translateY(-2px);
+        }
+
+        .campo-form.local {
+            grid-column: 1 / 3;
+        }
+
+        .erro-form {
+            display: none;
+            margin-top: 25px;
+            padding: 16px 22px;
+            border-radius: 18px;
+            background: #fff0f0;
+            color: #9f1d1d;
+            font-size: 20px;
+            font-weight: 800;
+        }
+
+        .opcoes-estrutura {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 28px;
+        }
+
+        .estrutura-card {
+            padding: 35px;
+            border-radius: 32px;
+            background: rgba(255, 255, 255, .65);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, .08);
+            display: flex;
+            flex-direction: column;
+            gap: 18px;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .estrutura-card h2 {
+            color: #163a63;
+            font-size: 38px;
+        }
+
+        .estrutura-card p {
+            color: #6b7280;
+            font-size: 20px;
+            line-height: 1.45;
+        }
+
+        .estrutura-acoes {
+            display: flex;
+            gap: 14px;
+            flex-wrap: wrap;
+            justify-content: center;
+            margin-top: 10px;
+        }
+
+        .modal-upgrades,
+        .modal-info {
+            position: fixed;
+            inset: 0;
+            display: none;
+            align-items: center;
+            justify-content: center;
+            background: rgba(22, 58, 99, .35);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            z-index: 10000;
+            opacity: 0;
+            transition: .3s ease;
+            padding: 25px;
+        }
+
+        .modal-upgrades.ativo,
+        .modal-info.ativo {
+            display: flex;
+            opacity: 1;
+        }
+
+        .modal-card {
+            width: 90%;
+            max-width: 900px;
+            max-height: 92vh;
+            overflow: auto;
+            padding: 45px;
+            border-radius: 36px;
+            background: rgba(255, 255, 255, .94);
+            box-shadow: 0 25px 70px rgba(0, 0, 0, .22);
+            text-align: center;
+            transform: translateY(20px) scale(.97);
+            transition: .3s ease;
+            position: relative;
+        }
+
+        .modal-upgrades.ativo .modal-card,
+        .modal-info.ativo .modal-card {
+            transform: translateY(0) scale(1);
+        }
+
+        .modal-card h2 {
+            font-size: 42px;
+            color: #163a63;
+            margin-bottom: 25px;
+        }
+
+        .modal-card p {
+            font-size: 20px;
+            color: #4b5563;
+            line-height: 1.55;
+        }
+
+        .modal-imagem {
+            width: 100%;
+            max-height: 420px;
+            object-fit: contain;
+            border-radius: 24px;
+            background: #f8fbff;
+            margin-bottom: 25px;
+        }
+
+        .modal-video {
+            width: 100%;
+            border-radius: 24px;
+            margin-bottom: 25px;
+            background: #000;
+        }
+
+        .alerta-upgrade {
+            background: #eef6ff;
+            border: 1px solid rgba(22, 58, 99, .18);
+            color: #163a63;
+            padding: 18px 22px;
+            border-radius: 22px;
+            font-size: 18px;
+            line-height: 1.4;
+            font-weight: 700;
+            margin-bottom: 25px;
+            text-align: left;
+        }
+
+        .lista-upgrades {
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
+            margin-bottom: 25px;
+        }
+
+        .upgrade-item {
+            width: 100%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 20px;
+            padding: 22px 26px;
+            border: none;
+            border-radius: 24px;
+            background: #ffffff;
+            color: #163a63;
+            font-size: 24px;
+            font-weight: 800;
+            cursor: pointer;
+            box-shadow: 0 8px 22px rgba(0, 0, 0, .08);
+            transition: .25s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .upgrade-item span:first-child {
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+            text-align: left;
+        }
+
+        .upgrade-item:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 12px 28px rgba(0, 0, 0, .12);
+        }
+
+        .upgrade-item.ativo {
+            background: #163a63;
+            color: #ffffff;
+        }
+
+        .upgrade-preco {
+            font-size: 22px;
+            white-space: nowrap;
+        }
+
+        .upgrade-extra {
+            font-size: 15px;
+            font-weight: 700;
+            opacity: .75;
+        }
+
+        .total-upgrades {
+            font-size: 28px;
+            font-weight: 900;
+            color: #163a63;
+            margin: 20px 0;
+        }
+
+        .nota-terceiros {
+            font-size: 16px;
+            line-height: 1.45;
+            color: #6b7280;
+            text-align: left;
+            background: #f8fbff;
+            padding: 18px 20px;
+            border-radius: 18px;
+            margin-top: 18px;
+        }
+
+        .moeda-pop {
+            position: absolute;
+            right: 35px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: #1f8f4d;
+            font-size: 22px;
+            font-weight: 900;
+            animation: moedaSubindo .7s ease forwards;
+            pointer-events: none;
+        }
+
+        .imagem-estrutura {
+
+            width: 300px;
+
+            height: 320px;
+
+            object-fit: contain;
+
+            background: white;
+
+            border-radius: 24px;
+
+            box-shadow:
+                0 12px 30px rgba(0, 0, 0, .15);
+
+            padding: 10px;
+        }
+
+        .imagem-estrutura:hover {
+
+            transform: scale(1.03);
+        }
+
+        @keyframes moedaSubindo {
+            0% {
+                opacity: 0;
+                transform: translateY(0) scale(.8);
+            }
+
+            30% {
+                opacity: 1;
+            }
+
+            100% {
+                opacity: 0;
+                transform: translateY(-55px) scale(1.1);
+            }
+        }
+
+        .foto-registro {
+            width: 90%;
+            height: auto;
+            display: block;
+            margin: 0 auto;
+        }
+
+        .card-registro {
+            max-width: 950px;
+            min-height: auto;
+            padding: 25px;
+        }
+
+        .registro-imagem-box {
+            width: 100%;
+            position: relative;
+            border-radius: 36px;
+            overflow: hidden;
+            margin-bottom: 20px;
+            box-shadow:
+                0 28px 55px rgba(0, 0, 0, .24);
+        }
+
+        .foto-registro {
+
+            width: 100%;
+
+            height: auto;
+
+            display: block;
+        }
+
+        .registro-imagem-box::after {
+            content: "";
+            position: absolute;
+            inset: 0;
+            pointer-events: none;
+            background:
+                linear-gradient(180deg,
+                    rgba(255, 255, 255, 0) 45%,
+                    rgba(22, 58, 99, .20) 100%);
+        }
+
+        .registro-selo {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            align-self: center;
+            margin-bottom: 18px;
+            padding: 10px 22px;
+            border-radius: 999px;
+            background: rgba(22, 58, 99, .10);
+            color: #163a63;
+            font-size: 18px;
+            font-weight: 900;
+            letter-spacing: .3px;
+        }
+
+        .titulo-registro {
+            font-size: 54px !important;
+            margin-bottom: 22px !important;
+        }
+
+        .texto-registro {
+            max-width: 780px;
+            margin: 0 auto 20px auto;
+            font-size: 26px;
+            line-height: 1.45;
+            color: #4b5563;
+            font-weight: 600;
+        }
+
+        .opcoes-registro {
+            gap: 22px;
+        }
+
+        .opcoes-registro .opcao-btn {
+            font-size: 24px;
+            padding: 20px 30px;
+        }
+
+        .toast-sucesso {
+
+            position: fixed;
+
+            top: 30px;
+
+            left: 50%;
+
+            transform: translateX(-50%);
+
+            background: #16a34a;
+
+            color: white;
+
+            padding: 18px 30px;
+
+            border-radius: 999px;
+
+            font-size: 20px;
+
+            font-weight: 800;
+
+            box-shadow:
+                0 12px 35px rgba(0, 0, 0, .25);
+
+            z-index: 99999;
+
+            opacity: 0;
+
+            pointer-events: none;
+
+            transition: .4s ease;
+        }
+
+        .toast-sucesso.ativo {
+
+            opacity: 1;
+
+            top: 50px;
+        }
+
+        .btn-pdf {
+            background: #ffffff;
+            color: #163a63;
+            border: 2px solid rgba(22, 58, 99, .25);
+        }
+
+        .btn-pdf:hover {
+            background: #163a63;
+            color: #ffffff;
+        }
+
+        .upgrade-ja-adicionado {
+            background: #dcfce7 !important;
+            border: 2px solid #16a34a;
+            cursor: default;
+        }
+
+        .upgrade-ja-adicionado:hover {
+            transform: none;
+            box-shadow: 0 8px 22px rgba(0, 0, 0, .08);
+        }
+
+        .upgrade-ja-adicionado .upgrade-preco {
+            color: #16a34a;
+            font-weight: 900;
+        }
+    </style>
+
+</head>
+
+<body>
+
+    <section class="hero" id="telaInicial">
+
+        <img src="logo.PNG" alt="Logo Grupo Se Controla" class="logo">
+
+        <img src="banda.png" alt="Grupo Se Controla" class="banda">
+
+        <h2 class="subtitulo">
+            Formulário de Orçamento
+        </h2>
+
+        <p class="descricao">
+            Responda algumas perguntas e receba<br>
+            uma proposta personalizada para seu evento.
+        </p>
+
+        <button class="btn-comecar" onclick="comecarFormulario()">
+            COMEÇAR AGORA
+        </button>
+
+    </section>
+
+    <section class="etapa" id="etapaQuem">
+
+        <div class="card-pergunta">
+
+            <h1>
+                Quem é você?
+            </h1>
+
+            <div class="opcoes">
+
+                <button class="opcao-btn" onclick="selecionarPerfil('Bar / Restaurante', this)">
+                    Bar / Restaurante
+                </button>
+
+                <button class="opcao-btn" onclick="selecionarPerfil('Casa de Show', this)">
+                    Casa de Show
+                </button>
+
+                <button class="opcao-btn" onclick="selecionarPerfil('Empresa de Eventos', this)">
+                    Empresa de Eventos
+                </button>
+
+                <button class="opcao-btn" onclick="selecionarPerfil('Particular', this)">
+                    Particular
+                </button>
+
+            </div>
+
+            <div class="acoes-funil">
+
+                <button class="btn-acao" onclick="voltarInicio()">
+                    ← Voltar
+                </button>
+
+                <button class="btn-acao" onclick="reiniciarFormulario()">
+                    ↺ Reiniciar
+                </button>
+
+                <button class="btn-acao" onclick="limparTudo()">
+                    🗑 Limpar Tudo
+                </button>
+            </div>
+
+        </div>
+
+    </section>
+
+    <section class="etapa" id="etapaTempo">
+
+        <div class="card-pergunta">
+
+            <h1>
+                Quanto tempo de show você deseja?
+            </h1>
+
+            <div class="opcoes">
+
+                <button class="opcao-btn" onclick="selecionarTempo('2 Horas', this)">
+                    2 Horas
+                </button>
+
+                <button class="opcao-btn" onclick="selecionarTempo('3 Horas', this)">
+                    3 Horas
+                </button>
+
+            </div>
+
+            <div class="acoes-funil">
+
+                <button class="btn-acao" onclick="voltarParaQuem()">
+                    ← Voltar
+                </button>
+
+                <button class="btn-acao" onclick="reiniciarFormulario()">
+                    ↺ Reiniciar
+                </button>
+
+            </div>
+
+        </div>
+
+    </section>
+
+    <section class="etapa" id="etapaSom">
+
+        <div class="card-pergunta">
+
+            <h1 id="tituloSom">
+                Você possui estrutura de som<br>
+                no seu estabelecimento?
+            </h1>
+
+            <div class="opcoes">
+
+                <button class="opcao-btn" onclick="selecionarSom('Sim', this)">
+                    Sim
+                </button>
+
+                <button class="opcao-btn" onclick="selecionarSom('Não', this)">
+                    Não
+                </button>
+
+            </div>
+
+            <div class="acoes-funil">
+
+                <button class="btn-acao" onclick="voltarParaTempo()">
+                    ← Voltar
+                </button>
+
+                <button class="btn-acao" onclick="reiniciarFormulario()">
+                    ↺ Reiniciar
+                </button>
+
+            </div>
+
+        </div>
+
+    </section>
+    <section class="etapa" id="etapaSomParticular">
+
+        <div class="card-pergunta">
+
+            <h1>
+                Qual estrutura de som é ideal<br>
+                para o seu evento?
+            </h1>
+
+            <div class="opcoes-estrutura">
+
+                <div class="estrutura-card">
+
+                    <h2>Estrutura Reduzida</h2>
+
+                    <p>
+                        Formato reduzido voltado para eventos de pequeno porte,
+                        com até 50 convidados.
+                    </p>
+
+                    <p>
+                        Sistema profissional de sonorização compacto, ideal para
+                        espaços reduzidos e para manter a banda mais próxima dos convidados.
+                    </p>
+
+                    <img src="som-reduzido.png" alt="Estrutura Reduzida" class="imagem-estrutura"
+                        onclick="abrirMapaPalco('reduzido')">
+                    <div class="estrutura-acoes">
+
+                        <button class="btn-acao btn-whatsapp" onclick="selecionarSomParticular('Estrutura Reduzida')">
+                            Selecionar
+                        </button>
+
+                    </div>
+
+                </div>
+
+                <div class="estrutura-card">
+
+                    <h2>Estrutura Completa</h2>
+
+                    <p>
+                        Formato completo voltado para eventos de médio porte,
+                        acima de 50 convidados.
+                    </p>
+
+                    <p>
+                        Sistema profissional de sonorização completo, com duas torres,
+                        ideal para espaços amplos que exigem maior potência e alcance.
+                    </p>
+
+                    <img src="som-completo.png" alt="Estrutura Completa" class="imagem-estrutura"
+                        onclick="abrirMapaPalco('completo')">
+                    <div class="estrutura-acoes">
+
+                        <button class="btn-acao btn-whatsapp" onclick="selecionarSomParticular('Estrutura Completa')">
+                            Selecionar
+                        </button>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+            <div class="acoes-funil">
+
+                <button class="btn-acao" onclick="voltarParaTempoParticular()">
+                    ← Voltar
+                </button>
+
+                <button class="btn-acao" onclick="reiniciarFormulario()">
+                    ↺ Reiniciar
+                </button>
+
+            </div>
+
+        </div>
+
+    </section>
+
+    <section class="etapa" id="etapaDadosEvento">
+
+        <div class="card-pergunta">
+
+            <h1>
+                Dados do evento
+            </h1>
+
+            <div class="form-evento">
+
+                <div class="campo-form">
+                    <label for="nomeContratante">Nome do contratante</label>
+                    <input type="text" id="nomeContratante" placeholder="Ex: Nome do Contratante">
+                </div>
+
+                <div class="campo-form">
+                    <label for="dataEvento">Data do evento</label>
+                    <input type="date" id="dataEvento">
+                </div>
+
+                <div class="campo-form">
+                    <label for="horarioEvento">Horário de início</label>
+                    <input type="time" id="horarioEvento">
+                </div>
+
+                <div class="campo-form local">
+                    <label for="localEvento">Local do evento</label>
+                    <input type="text" id="localEvento" placeholder="Ex: Residência - Águas Claras, DF">
+                </div>
+
+            </div>
+
+            <div class="erro-form" id="erroDadosEvento">
+                Preencha todos os campos para continuar.
+            </div>
+
+            <div class="acoes-funil">
+
+                <button class="btn-acao btn-whatsapp" onclick="continuarDadosEvento()">
+                    Continuar
+                </button>
+
+                <button class="btn-acao" onclick="voltarParaOrigemDados()">
+                    ← Voltar
+                </button>
+
+                <button class="btn-acao" onclick="reiniciarFormulario()">
+                    ↺ Reiniciar
+                </button>
+
+            </div>
+
+        </div>
+
+    </section>
+
+    <section class="etapa" id="etapaUpgradeParticular">
+
+        <div class="card-pergunta card-registro">
+
+            <div class="registro-imagem-box">
+
+                <img src="surdao.jpg" alt="Foto + After Movie" class="foto-registro">
+
+            </div>
+
+            <div class="registro-selo">
+                Registro profissional de foto e vídeo
+            </div>
+
+            <h1 class="titulo-registro">
+                📸 Fotos + After Movie
+            </h1>
+
+            <p class="texto-registro">
+                Fotos profissionais e um vídeo personalizado para eternizar os melhores momentos do seu evento.
+            </p>
+
+            <div class="opcoes opcoes-registro">
+
+                <button class="opcao-btn btn-exemplo" onclick="abrirAfterMovie()">
+                    ▶ VER EXEMPLO
+                </button>
+
+                <button class="opcao-btn btn-nao" onclick="selecionarRegistroProfissional(false, this)">
+                    ➡ Continuar sem registro profissional
+                </button>
+
+            </div>
+
+            <div class="acoes-funil">
+
+                <button class="btn-acao" onclick="voltarParaSomParticularRegistro()">
+                    ← Voltar
+                </button>
+
+                <button class="btn-acao" onclick="reiniciarFormulario()">
+                    ↺ Reiniciar
+                </button>
+
+            </div>
+
+        </div>
+
+    </section>
+
+    <section class="etapa" id="etapaOrcamento">
+
+        <div class="card-pergunta">
+
+            <h1>
+                Orçamento preliminar
+            </h1>
+
+            <div class="resumo-orcamento">
+
+                <div class="linha-orcamento linha-dados-evento">
+                    <span>Contratante</span>
+                    <span id="resumoContratante">-</span>
+                </div>
+
+                <div class="linha-orcamento linha-dados-evento">
+                    <span>Data do evento</span>
+                    <span id="resumoDataEvento">-</span>
+                </div>
+
+                <div class="linha-orcamento linha-dados-evento">
+                    <span>Horário</span>
+                    <span id="resumoHorarioEvento">-</span>
+                </div>
+
+                <div class="linha-orcamento linha-dados-evento">
+                    <span>Local</span>
+                    <span id="resumoLocalEvento">-</span>
+                </div>
+
+                <div class="linha-orcamento">
+                    <span>Perfil</span>
+                    <span id="resumoPerfil">-</span>
+                </div>
+
+                <div class="linha-orcamento">
+                    <span>Tempo de show</span>
+                    <span id="resumoTempo">-</span>
+                </div>
+
+                <div class="linha-orcamento">
+                    <span>Estrutura de som</span>
+                    <span id="resumoSom">-</span>
+                </div>
+
+                <div class="linha-orcamento" id="linhaValorBase">
+                    <span>Valor base</span>
+                    <span id="resumoValorBase">-</span>
+                </div>
+
+                <div class="linha-orcamento" id="linhaUpgrades" style="display:none;">
+                    <span>Upgrades</span>
+                    <span id="resumoUpgrades">-</span>
+                </div>
+
+            </div>
+
+            <div class="valor-final" id="valorOrcamento">
+                R$ 0
+            </div>
+
+            <p class="observacao" id="observacaoOrcamento">
+                Este é um orçamento preliminar com base nas informações selecionadas.
+                Para confirmar disponibilidade, detalhes técnicos e contratação, fale conosco pelo WhatsApp.
+            </p>
+
+            <div class="acoes-funil">
+
+                <button class="btn-acao btn-upgrade" id="btnAbrirUpgrades" onclick="abrirModalUpgrades()"
+                    style="display:none;">
+                    Adicionar upgrades
+                </button>
+
+                <a href="#" target="_blank" class="btn-acao btn-whatsapp" id="btnWhatsapp">
+                    Falar no WhatsApp
+                </a>
+                <button class="btn-acao btn-pdf" onclick="gerarPDFProposta()">
+                    📄 Baixar proposta em PDF
+                </button>
+                <button class="btn-acao" onclick="voltarDoOrcamento()">
+                    ← Voltar
+                </button>
+
+                <button class="btn-acao" onclick="reiniciarFormulario()">
+                    ↺ Reiniciar
+                </button>
+
+            </div>
+
+        </div>
+
+    </section>
+
+    <div class="modal-upgrades" id="modalUpgrades">
+
+        <div class="modal-card">
+
+            <h2 id="tituloUpgrades">
+                Adicionar upgrades
+            </h2>
+
+            <div class="alerta-upgrade">
+                💡 A contratação conjunta de iluminação, palco e painel de LED pode gerar melhores condições comerciais,
+                já que esses serviços costumam ser fornecidos pelo mesmo parceiro especializado.
+            </div>
+
+            <div class="lista-upgrades" id="listaUpgrades">
+
+                <button class="upgrade-item" onclick="alternarUpgrade('Iluminação', 1600, this)">
+                    <span>Iluminação</span>
+                    <span class="upgrade-preco">R$ 1.600</span>
+                </button>
+
+                <button class="upgrade-item" onclick="alternarUpgrade('Palco', 1000, this)">
+                    <span>
+                        Palco
+                        <small class="upgrade-extra">a depender do tamanho</small>
+                    </span>
+                    <span class="upgrade-preco">R$ 1.000</span>
+                </button>
+
+                <button class="upgrade-item" onclick="alternarUpgrade('Painel de LED', 1600, this)">
+                    <span>
+                        Painel de LED<br>
+                        <small class="upgrade-extra">a depender do tamanho</small>
+                    </span>
+                    <span class="upgrade-preco">R$ 1.600</span>
+                </button>
+
+                <button class="upgrade-item" onclick="alternarUpgrade('Gerador', 1800, this)">
+                    <span>Gerador</span>
+                    <span class="upgrade-preco">R$ 1.800</span>
+                </button>
+
+            </div>
+
+            <div class="total-upgrades">
+                Total dos upgrades: <span id="totalUpgradesModal">R$ 0,00</span>
+            </div>
+
+            <div class="acoes-funil">
+
+                <button class="btn-acao btn-whatsapp" onclick="aplicarUpgrades()">
+                    Aplicar upgrades
+                </button>
+
+                <button class="btn-acao" onclick="fecharModalUpgrades()">
+                    Fechar
+                </button>
+
+            </div>
+
+            <div class="nota-terceiros">
+                * Os serviços adicionais são fornecidos por parceiros terceirizados.
+                Os valores são estimativos e podem sofrer alterações conforme disponibilidade,
+                local do evento, necessidades técnicas e fornecedor disponível.
+            </div>
+
+        </div>
+
+    </div>
+
+    <div class="modal-info" id="modalMapaPalco">
+
+        <div class="modal-card">
+
+            <h2 id="tituloMapaPalco">
+                Mapa de palco
+            </h2>
+
+            <img src="" alt="Mapa de palco" class="modal-imagem" id="imagemMapaPalco">
+
+            <div class="acoes-funil">
+
+                <button class="btn-acao" onclick="fecharMapaPalco()">
+                    Fechar
+                </button>
+
+            </div>
+
+        </div>
+
+    </div>
+
+    <div class="modal-info" id="modalAfterMovie">
+
+        <div class="modal-card">
+
+            <h2>
+                Registro Profissional do Evento
+            </h2>
+
+            <video class="modal-video" controls preload="metadata">
+                <source src="aftermovie-divulgacao.mp4" type="video/mp4">
+                Seu navegador não conseguiu reproduzir este vídeo.
+            </video>
+            <p class="observacao">
+
+                O pacote inclui:
+
+                <br><br>
+
+                ✓ Cobertura fotográfica do evento
+
+                <br>
+
+                ✓ Fotos editadas em alta qualidade
+
+                <br>
+
+                ✓ After Movie personalizado
+
+                <br>
+
+                ✓ Entrega digital do material
+
+            </p>
+            <div class="acoes-funil">
+
+                <button class="btn-acao btn-whatsapp" onclick="adicionarRegistroPeloVideo()">
+                    ✓ QUERO INCLUIR FOTOS + AFTER MOVIE (+R$ 600)
+                </button>
+
+                <button class="btn-acao" onclick="fecharAfterMovie()">
+                    Fechar
+                </button>
+
+            </div>
+
+        </div>
+
+    </div>
+    <a href="https://www.instagram.com/gruposecontrola/" target="_blank" class="instagram-link">
+        <img src="https://cdn-icons-png.flaticon.com/512/2111/2111463.png" alt="Instagram Grupo Se Controla">
+
+        <span class="instagram-text">
+            @gruposecontrola
+        </span>
+    </a>
+
+
+    <script>
+
+        const respostas = {
+            dadosEvento: {}
+        };
+
+        const numeroWhatsapp = "5561984938473";
+
+        const upgradesSelecionados = [];
+
+        let valorBaseAtual = null;
+
+        let valorUpgradesAtual = 0;
+
+        let valorTotalAtual = null;
+
+        function mostrarEtapa(etapa) {
+
+            etapa.classList.add("ativa");
+
+            setTimeout(function () {
+
+                etapa.classList.add("visivel");
+
+            }, 20);
+        }
+
+        function esconderEtapa(etapa) {
+
+            if (!etapa.classList.contains("ativa")) {
+                return;
+            }
+
+            etapa.classList.remove("visivel");
+
+            etapa.classList.add("saindo");
+
+            setTimeout(function () {
+
+                etapa.classList.remove("ativa");
+
+                etapa.classList.remove("saindo");
+
+            }, 550);
+        }
+
+        function comecarFormulario() {
+
+            const telaInicial = document.getElementById("telaInicial");
+
+            const etapaQuem = document.getElementById("etapaQuem");
+
+            telaInicial.classList.add("saindo");
+
+            setTimeout(function () {
+
+                telaInicial.style.display = "none";
+
+                mostrarEtapa(etapaQuem);
+
+            }, 550);
+        }
+
+        function selecionarPerfil(perfil, botao) {
+
+            respostas.perfil = perfil;
+
+            botao.classList.add("selecionado");
+
+            setTimeout(function () {
+
+                esconderEtapa(
+                    document.getElementById("etapaQuem")
+                );
+
+                setTimeout(function () {
+
+                    mostrarEtapa(
+                        document.getElementById("etapaTempo")
+                    );
+
+                }, 300);
+
+            }, 300);
+        }
+
+        function selecionarTempo(tempo, botao) {
+
+            respostas.tempo = tempo;
+
+            botao.classList.add("selecionado");
+
+            setTimeout(function () {
+
+                esconderEtapa(
+                    document.getElementById("etapaTempo")
+                );
+
+                setTimeout(function () {
+
+                    const tituloSom =
+                        document.getElementById("tituloSom");
+
+                    const botoesSom =
+                        document.querySelectorAll("#etapaSom .opcao-btn");
+
+                    if (respostas.perfil === "Particular") {
+
+                        mostrarEtapa(
+                            document.getElementById("etapaSomParticular")
+                        );
+
+                        return;
+
+                    } else {
+
+                        botoesSom[0].innerText = "Sim";
+                        botoesSom[0].setAttribute(
+                            "onclick",
+                            "selecionarSom('Sim', this)"
+                        );
+
+                        botoesSom[1].innerText = "Não";
+                        botoesSom[1].setAttribute(
+                            "onclick",
+                            "selecionarSom('Não', this)"
+                        );
+
+                        if (respostas.perfil === "Empresa de Eventos") {
+
+                            tituloSom.innerHTML =
+                                "Você possui estrutura de som<br>para este evento?";
+
+                        } else {
+
+                            tituloSom.innerHTML =
+                                "Você possui estrutura de som<br>no seu estabelecimento?";
+
+                        }
+                    }
+
+                    mostrarEtapa(
+                        document.getElementById("etapaSom")
+                    );
+
+                }, 300);
+
+            }, 300);
+        }
+
+        function selecionarSom(som, botao) {
+
+            respostas.som = som;
+
+            botao.classList.add("selecionado");
+
+            setTimeout(function () {
+
+                esconderEtapa(
+                    document.getElementById("etapaSom")
+                );
+
+                setTimeout(function () {
+
+                    if (respostas.perfil === "Particular") {
+
+                        mostrarEtapa(
+                            document.getElementById("etapaDadosEvento")
+                        );
+
+                    } else {
+
+                        if (respostas.perfil === "Particular") {
+
+                            mostrarEtapa(
+                                document.getElementById(
+                                    "etapaUpgradeParticular"
+                                )
+                            );
+
+                        } else {
+
+                            mostrarOrcamento();
+
+                        }
+
+                    }
+
+                }, 300);
+
+            }, 300);
+        }
+
+        function formatarDataBR(dataISO) {
+
+            if (!dataISO) {
+                return "-";
+            }
+
+            const partes = dataISO.split("-");
+
+            return partes[2] + "/" + partes[1] + "/" + partes[0];
+        }
+
+        function dataPropostaHoje() {
+
+            const hoje = new Date();
+
+            return hoje.toLocaleDateString("pt-BR");
+        }
+
+        function continuarDadosEvento() {
+
+            const nome =
+                document.getElementById("nomeContratante").value.trim();
+
+            const data =
+                document.getElementById("dataEvento").value;
+
+            const horario =
+                document.getElementById("horarioEvento").value;
+
+            const local =
+                document.getElementById("localEvento").value.trim();
+
+            const erro =
+                document.getElementById("erroDadosEvento");
+
+            if (!nome || !data || !horario || !local) {
+
+                erro.style.display = "block";
+
+                return;
+            }
+
+            erro.style.display = "none";
+
+            respostas.dadosEvento = {
+                nome: nome,
+                data: data,
+                horario: horario,
+                local: local,
+                dataProposta: dataPropostaHoje()
+            };
+
+            esconderEtapa(
+                document.getElementById("etapaDadosEvento")
+            );
+
+            setTimeout(function () {
+
+                if (respostas.perfil === "Particular") {
+
+                    mostrarOrcamento();
+
+                } else {
+
+                    mostrarOrcamento();
+
+                }
+
+            }, 300);
+        }
+
+        function voltarParaOrigemDados() {
+
+            limparSelecoes();
+
+            esconderEtapa(
+                document.getElementById("etapaDadosEvento")
+            );
+
+            setTimeout(function () {
+
+                if (respostas.perfil === "Particular") {
+
+                    mostrarEtapa(
+                        document.getElementById("etapaSomParticular")
+                    );
+
+                } else {
+
+                    mostrarEtapa(
+                        document.getElementById("etapaSom")
+                    );
+
+                }
+
+            }, 300);
+        }
+        function calcularOrcamento() {
+
+            if (
+                respostas.perfil === "Bar / Restaurante" ||
+                respostas.perfil === "Casa de Show"
+            ) {
+
+                if (respostas.tempo === "2 Horas" && respostas.som === "Sim") {
+                    return 2300;
+                }
+
+                if (respostas.tempo === "2 Horas" && respostas.som === "Não") {
+                    return 3500;
+                }
+
+                if (respostas.tempo === "3 Horas" && respostas.som === "Sim") {
+                    return 2700;
+                }
+
+                if (respostas.tempo === "3 Horas" && respostas.som === "Não") {
+                    return 4000;
+                }
+            }
+
+            if (respostas.perfil === "Empresa de Eventos") {
+
+                if (respostas.tempo === "2 Horas" && respostas.som === "Sim") {
+                    return 2400;
+                }
+
+                if (respostas.tempo === "2 Horas" && respostas.som === "Não") {
+                    return 3000;
+                }
+
+                if (respostas.tempo === "3 Horas" && respostas.som === "Sim") {
+                    return 2800;
+                }
+
+                if (respostas.tempo === "3 Horas" && respostas.som === "Não") {
+                    return 3500;
+                }
+            }
+
+            if (respostas.perfil === "Particular") {
+
+                if (respostas.tempo === "2 Horas" && respostas.som === "Estrutura Reduzida") {
+                    return 2600;
+                }
+
+                if (respostas.tempo === "2 Horas" && respostas.som === "Estrutura Completa") {
+                    return 3000;
+                }
+
+                if (respostas.tempo === "3 Horas" && respostas.som === "Estrutura Reduzida") {
+                    return 3000;
+                }
+
+                if (respostas.tempo === "3 Horas" && respostas.som === "Estrutura Completa") {
+                    return 3500;
+                }
+            }
+
+            return null;
+        }
+
+        function formatarMoeda(valor) {
+
+            if (valor === null) {
+                return "A confirmar";
+            }
+
+            return valor.toLocaleString(
+                "pt-BR",
+                {
+                    style: "currency",
+                    currency: "BRL"
+                }
+            );
+        }
+
+        function mostrarOrcamento() {
+
+            valorBaseAtual = calcularOrcamento();
+
+            valorUpgradesAtual = calcularTotalUpgrades();
+
+            if (valorBaseAtual === null) {
+                valorTotalAtual = null;
+            } else {
+                valorTotalAtual = valorBaseAtual + valorUpgradesAtual;
+            }
+
+            const exibirDadosEvento =
+                respostas.perfil === "Particular";
+
+            document
+                .querySelectorAll(".linha-dados-evento")
+                .forEach(function (linha) {
+
+                    linha.style.display =
+                        exibirDadosEvento ? "flex" : "none";
+
+                });
+
+            document.getElementById("resumoContratante").innerText =
+                respostas.dadosEvento.nome || "-";
+
+            document.getElementById("resumoDataEvento").innerText =
+                formatarDataBR(respostas.dadosEvento.data);
+
+            document.getElementById("resumoHorarioEvento").innerText =
+                respostas.dadosEvento.horario || "-";
+
+            document.getElementById("resumoLocalEvento").innerText =
+                respostas.dadosEvento.local || "-";
+
+            document.getElementById("resumoPerfil").innerText =
+                respostas.perfil;
+
+            document.getElementById("resumoTempo").innerText =
+                respostas.tempo;
+
+            if (
+                respostas.perfil === "Bar / Restaurante" ||
+                respostas.perfil === "Casa de Show" ||
+                respostas.perfil === "Empresa de Eventos"
+            ) {
+
+                if (respostas.som === "Não") {
+
+                    document.getElementById("resumoSom").innerText =
+                        "Inclusa";
+
+                } else {
+
+                    document.getElementById("resumoSom").innerText =
+                        "Não inclusa";
+                }
+
+            } else {
+
+                document.getElementById("resumoSom").innerText =
+                    respostas.som;
+            }
+
+            document.getElementById("resumoValorBase").innerText =
+                formatarMoeda(valorBaseAtual);
+
+            document.getElementById("valorOrcamento").innerText =
+                formatarMoeda(valorTotalAtual);
+            const btnUpgrade =
+                document.getElementById("btnAbrirUpgrades");
+
+            if (respostas.perfil === "Particular") {
+
+                btnUpgrade.innerHTML =
+                    "⭐ Personalizar seu evento";
+
+            } else {
+
+                btnUpgrade.innerHTML =
+                    "Adicionar upgrades";
+            }
+
+            if (
+                respostas.perfil === "Empresa de Eventos" ||
+                respostas.perfil === "Particular"
+            ) {
+
+                btnUpgrade.style.display =
+                    "inline-flex";
+
+                atualizarLinhaUpgrades();
+
+            } else {
+
+                btnUpgrade.style.display =
+                    "none";
+
+                document.getElementById("linhaUpgrades").style.display =
+                    "none";
+            }
+
+            atualizarWhatsapp();
+
+            mostrarEtapa(
+                document.getElementById("etapaOrcamento")
+            );
+        }
+        function calcularTotalUpgrades() {
+
+            let total = 0;
+
+            upgradesSelecionados.forEach(function (item) {
+
+                total += item.valor;
+
+            });
+
+            return total;
+        }
+
+        function abrirModalUpgrades() {
+
+            const titulo =
+                document.getElementById("tituloUpgrades");
+
+            const lista =
+                document.getElementById("listaUpgrades");
+
+            const alerta =
+                document.querySelector(".alerta-upgrade");
+
+            if (respostas.perfil === "Particular") {
+
+                alerta.style.display = "none";
+
+                titulo.innerText =
+                    "⭐ Personalize seu evento";
+
+                const registroJaAdicionado =
+                    upgradesSelecionados.some(function (item) {
+
+                        return item.nome ===
+                            "Registro Profissional do Evento";
+
+                    });
+
+                lista.innerHTML = `
+
+            <button
+                class="upgrade-item"
+                onclick="alternarUpgrade('Iluminação',800,this)"
+            >
+                <span>💡 Iluminação</span>
+                <span class="upgrade-preco">R$ 800</span>
+            </button>
+
+            <button
+                class="upgrade-item"
+                onclick="alternarUpgrade('Hora Extra - Som',300,this)"
+            >
+                <span>🔊 Hora Extra - Som</span>
+                <span class="upgrade-preco">R$ 300</span>
+            </button>
+
+            <button
+                class="upgrade-item"
+                onclick="alternarUpgrade('Hora Extra - Banda',1200,this)"
+            >
+                <span>🎵 Hora Extra - Banda</span>
+                <span class="upgrade-preco">R$ 1.200</span>
+            </button>
+
+            ${registroJaAdicionado
+                        ?
+                        `
+                <button
+                    class="upgrade-item upgrade-ja-adicionado"
+                    type="button"
+                >
+                    <span>✅ Registro Profissional Incluído</span>
+                    <span class="upgrade-preco">ADICIONADO</span>
+                </button>
+                `
+                        :
+                        `
+                <button
+                    class="upgrade-item"
+                    onclick="abrirAfterMovie()"
+                >
+                    <span>📸 Fotos + After Movie</span>
+                    <span class="upgrade-preco">▶ DETALHES</span>
+                </button>
+                `
+                    }
+
+        `;
+
+            } else {
+
+                alerta.style.display = "block";
+
+                titulo.innerText =
+                    "Adicionar upgrades";
+
+                lista.innerHTML = `
+
+            <button class="upgrade-item" onclick="alternarUpgrade('Iluminação', 1600, this)">
+                <span>Iluminação</span>
+                <span class="upgrade-preco">R$ 1.600</span>
+            </button>
+
+            <button class="upgrade-item" onclick="alternarUpgrade('Palco', 1000, this)">
+                <span>
+                    Palco
+                    <small class="upgrade-extra">a depender do tamanho</small>
+                </span>
+                <span class="upgrade-preco">R$ 1.000</span>
+            </button>
+
+            <button class="upgrade-item" onclick="alternarUpgrade('Painel de LED', 1600, this)">
+                <span>
+                    Painel de LED
+                    <small class="upgrade-extra">a depender do tamanho</small>
+                </span>
+                <span class="upgrade-preco">R$ 1.600</span>
+            </button>
+
+            <button class="upgrade-item" onclick="alternarUpgrade('Gerador', 1800, this)">
+                <span>Gerador</span>
+                <span class="upgrade-preco">R$ 1.800</span>
+            </button>
+
+        `;
+            }
+
+            document
+                .getElementById("modalUpgrades")
+                .classList
+                .add("ativo");
+
+            atualizarTotalUpgradesModal();
+        }
+
+        function fecharModalUpgrades() {
+
+            document
+                .getElementById("modalUpgrades")
+                .classList
+                .remove("ativo");
+        }
+
+        function alternarUpgrade(nome, valor, botao) {
+
+            const index =
+                upgradesSelecionados
+                    .findIndex(function (item) {
+                        return item.nome === nome;
+                    });
+
+            if (index >= 0) {
+
+                upgradesSelecionados.splice(index, 1);
+
+                botao.classList.remove("ativo");
+
+            } else {
+
+                upgradesSelecionados.push({
+                    nome: nome,
+                    valor: valor
+                });
+
+                botao.classList.add("ativo");
+
+                animarMoeda(botao, valor);
+            }
+
+            atualizarTotalUpgradesModal();
+        }
+
+        function animarMoeda(botao, valor) {
+
+            const moeda =
+                document.createElement("span");
+
+            moeda.classList.add("moeda-pop");
+
+            moeda.innerText =
+                "+ " + formatarMoeda(valor);
+
+            botao.appendChild(moeda);
+
+            setTimeout(function () {
+
+                moeda.remove();
+
+            }, 700);
+        }
+
+        function atualizarTotalUpgradesModal() {
+
+            const total =
+                calcularTotalUpgrades();
+
+            document.getElementById("totalUpgradesModal").innerText =
+                formatarMoeda(total);
+        }
+
+        function aplicarUpgrades() {
+
+            valorUpgradesAtual =
+                calcularTotalUpgrades();
+
+            if (valorBaseAtual === null) {
+                valorTotalAtual = null;
+            } else {
+                valorTotalAtual =
+                    valorBaseAtual + valorUpgradesAtual;
+            }
+
+            document.getElementById("valorOrcamento").innerText =
+                formatarMoeda(valorTotalAtual);
+
+            atualizarLinhaUpgrades();
+
+            atualizarWhatsapp();
+
+            fecharModalUpgrades();
+        }
+
+        function atualizarLinhaUpgrades() {
+
+            const linhaUpgrades =
+                document.getElementById("linhaUpgrades");
+
+            const resumoUpgrades =
+                document.getElementById("resumoUpgrades");
+
+            if (upgradesSelecionados.length === 0) {
+
+                linhaUpgrades.style.display =
+                    "none";
+
+                resumoUpgrades.innerText =
+                    "-";
+
+                return;
+            }
+
+            linhaUpgrades.style.display =
+                "flex";
+
+            resumoUpgrades.innerText =
+                formatarMoeda(
+                    calcularTotalUpgrades()
+                );
+        }
+
+        function gerarTextoUpgradesWhatsapp() {
+
+            if (upgradesSelecionados.length === 0) {
+                return "Nenhum";
+            }
+
+            let texto = "";
+
+            upgradesSelecionados.forEach(function (item) {
+
+                texto +=
+                    "- " + item.nome + ": " + formatarMoeda(item.valor) + "%0A";
+
+            });
+
+            return texto;
+        }
+        function textoEstruturaSomWhatsapp() {
+
+            if (
+                respostas.perfil === "Bar / Restaurante" ||
+                respostas.perfil === "Casa de Show" ||
+                respostas.perfil === "Empresa de Eventos"
+            ) {
+
+                if (respostas.som === "Não") {
+                    return "Inclusa no orçamento";
+                }
+
+                return "Não inclusa - contratante possui estrutura";
+            }
+
+            return respostas.som;
+        }
+
+        function atualizarWhatsapp() {
+
+            let dadosEventoTexto = "";
+
+            if (respostas.perfil === "Particular") {
+
+                dadosEventoTexto =
+                    "Nome do contratante: " + (respostas.dadosEvento.nome || "-") + "%0A" +
+                    "Data do evento: " + formatarDataBR(respostas.dadosEvento.data) + "%0A" +
+                    "Horário de início: " + (respostas.dadosEvento.horario || "-") + "%0A" +
+                    "Local do evento: " + (respostas.dadosEvento.local || "-") + "%0A" +
+                    "Data da proposta: " + (respostas.dadosEvento.dataProposta || dataPropostaHoje()) + "%0A%0A";
+            }
+
+            const mensagem =
+                "Olá! Acabei de preencher o formulário do Grupo Se Controla.%0A%0A" +
+                dadosEventoTexto +
+                "Perfil: " + respostas.perfil + "%0A" +
+                "Tempo de show: " + respostas.tempo + "%0A" +
+                "Estrutura de som: " + textoEstruturaSomWhatsapp() + "%0A%0A" +
+                "Valor base: " + formatarMoeda(valorBaseAtual) + "%0A" +
+                "Upgrades selecionados:%0A" + gerarTextoUpgradesWhatsapp() +
+                "%0AValor dos upgrades: " + formatarMoeda(calcularTotalUpgrades()) + "%0A" +
+                "Valor estimado total: " + formatarMoeda(valorTotalAtual) + "%0A%0A" +
+                "Observação: os serviços adicionais são terceirizados e os valores podem sofrer alterações conforme disponibilidade, local do evento, necessidades técnicas e fornecedor disponível.%0A%0A" +
+                "Gostaria de prosseguir com o orçamento.";
+
+            document.getElementById("btnWhatsapp").href =
+                "https://wa.me/" + numeroWhatsapp + "?text=" + mensagem;
+            document.getElementById("whatsappRodape").href =
+                "https://wa.me/" + numeroWhatsapp + "?text=" + mensagem;
+        }
+
+        function voltarInicio() {
+
+            const telaInicial = document.getElementById("telaInicial");
+
+            esconderEtapa(
+                document.getElementById("etapaQuem")
+            );
+
+            setTimeout(function () {
+
+                telaInicial.style.display = "flex";
+
+                telaInicial.classList.remove("saindo");
+
+                telaInicial.classList.add("entrando");
+
+            }, 350);
+        }
+
+        function voltarParaQuem() {
+
+            limparSelecoes();
+
+            esconderEtapa(
+                document.getElementById("etapaTempo")
+            );
+
+            setTimeout(function () {
+
+                mostrarEtapa(
+                    document.getElementById("etapaQuem")
+                );
+
+            }, 300);
+        }
+
+        function voltarParaTempo() {
+
+            limparSelecoes();
+
+            esconderEtapa(
+                document.getElementById("etapaSom")
+            );
+
+            setTimeout(function () {
+
+                mostrarEtapa(
+                    document.getElementById("etapaTempo")
+                );
+
+            }, 300);
+        }
+
+        function voltarDoOrcamento() {
+
+            limparSelecoes();
+
+            esconderEtapa(
+                document.getElementById("etapaOrcamento")
+            );
+
+            setTimeout(function () {
+
+                if (respostas.perfil === "Particular") {
+
+                    mostrarEtapa(
+                        document.getElementById("etapaDadosEvento")
+                    );
+
+                } else {
+
+                    mostrarEtapa(
+                        document.getElementById("etapaSom")
+                    );
+
+                }
+
+            }, 300);
+        }
+
+        function limparUpgrades() {
+
+            upgradesSelecionados.length = 0;
+
+            document
+                .querySelectorAll(".upgrade-item")
+                .forEach(function (botao) {
+
+                    botao.classList.remove("ativo");
+
+                });
+
+            atualizarTotalUpgradesModal();
+        }
+
+        function reiniciarFormulario() {
+
+            document.getElementById("erroDadosEvento").style.display = "none";
+
+            const telaInicial =
+                document.getElementById("telaInicial");
+
+            esconderEtapa(
+                document.getElementById("etapaQuem")
+            );
+
+            esconderEtapa(
+                document.getElementById("etapaTempo")
+            );
+
+            esconderEtapa(
+                document.getElementById("etapaSom")
+            );
+
+            esconderEtapa(
+                document.getElementById("etapaDadosEvento")
+            );
+
+            esconderEtapa(
+                document.getElementById("etapaOrcamento")
+            );
+            esconderEtapa(
+                document.getElementById("etapaSomParticular")
+            );
+
+            fecharModalUpgrades();
+
+            setTimeout(function () {
+
+                telaInicial.style.display = "flex";
+
+                telaInicial.classList.remove("saindo");
+
+                telaInicial.classList.add("entrando");
+
+            }, 350);
+        }
+
+        function limparSelecoes() {
+
+            document
+                .querySelectorAll(".opcao-btn")
+                .forEach(function (botao) {
+
+                    botao.classList.remove("selecionado");
+
+                });
+        }
+        function selecionarSomParticular(tipoSom) {
+
+            respostas.som = tipoSom;
+
+            esconderEtapa(
+                document.getElementById("etapaSomParticular")
+            );
+
+            setTimeout(function () {
+
+                mostrarEtapa(
+                    document.getElementById("etapaUpgradeParticular")
+                );
+
+            }, 300);
+        }
+
+        function voltarParaTempoParticular() {
+
+            esconderEtapa(
+                document.getElementById("etapaSomParticular")
+            );
+
+            setTimeout(function () {
+
+                mostrarEtapa(
+                    document.getElementById("etapaTempo")
+                );
+
+            }, 300);
+        }
+        function abrirMapaPalco(tipo) {
+
+            const modal =
+                document.getElementById("modalMapaPalco");
+
+            const titulo =
+                document.getElementById("tituloMapaPalco");
+
+            const imagem =
+                document.getElementById("imagemMapaPalco");
+
+            if (tipo === "reduzido") {
+
+                titulo.innerText =
+                    "Mapa de palco - Estrutura Reduzida";
+
+                imagem.src =
+                    "mapa-palco-reduzido.png";
+
+            } else {
+
+                titulo.innerText =
+                    "Mapa de palco - Estrutura Completa";
+
+                imagem.src =
+                    "mapa-palco-completo.png";
+            }
+
+            modal.classList.add("ativo");
+        }
+
+        function fecharMapaPalco() {
+
+            document
+                .getElementById("modalMapaPalco")
+                .classList
+                .remove("ativo");
+        }
+
+        function toggleUpgrade(nome, valor, botao) {
+
+            const indice =
+                upgradesSelecionados.findIndex(function (item) {
+                    return item.nome === nome;
+                });
+
+            if (indice > -1) {
+
+                upgradesSelecionados.splice(indice, 1);
+
+                botao.classList.remove("selecionado");
+
+            } else {
+
+                upgradesSelecionados.push({
+                    nome: nome,
+                    valor: valor
+                });
+
+                botao.classList.add("selecionado");
+            }
+        }
+
+        function finalizarUpgradesParticular() {
+
+            esconderEtapa(
+                document.getElementById("etapaUpgradeParticular")
+            );
+
+            setTimeout(function () {
+
+                mostrarEtapa(
+                    document.getElementById("etapaDadosEvento")
+                );
+
+            }, 300);
+        }
+        function abrirAfterMovie() {
+
+            document
+                .getElementById("modalAfterMovie")
+                .classList
+                .add("ativo");
+        }
+
+        function fecharAfterMovie() {
+
+            document
+                .getElementById("modalAfterMovie")
+                .classList
+                .remove("ativo");
+        }
+        function selecionarRegistroProfissional(querRegistro, botao) {
+
+            limparSelecoes();
+
+            botao.classList.add("selecionado");
+
+            const indice =
+                upgradesSelecionados.findIndex(function (item) {
+                    return item.nome === "Registro Profissional do Evento";
+                });
+
+            if (indice > -1) {
+                upgradesSelecionados.splice(indice, 1);
+            }
+
+            if (querRegistro === true) {
+
+                upgradesSelecionados.push({
+                    nome: "Registro Profissional do Evento",
+                    valor: 600
+                });
+            }
+
+            setTimeout(function () {
+
+                esconderEtapa(
+                    document.getElementById("etapaUpgradeParticular")
+                );
+
+                setTimeout(function () {
+
+                    mostrarEtapa(
+                        document.getElementById("etapaDadosEvento")
+                    );
+
+                }, 300);
+
+            }, 300);
+        }
+
+        function voltarParaSomParticularRegistro() {
+
+            limparSelecoes();
+
+            esconderEtapa(
+                document.getElementById("etapaUpgradeParticular")
+            );
+
+            setTimeout(function () {
+
+                mostrarEtapa(
+                    document.getElementById("etapaSomParticular")
+                );
+
+            }, 300);
+        }
+
+        function limparTudo() {
+
+            respostas.perfil = null;
+            respostas.tempo = null;
+            respostas.som = null;
+            respostas.dadosEvento = {};
+
+            document.getElementById("nomeContratante").value = "";
+            document.getElementById("dataEvento").value = "";
+            document.getElementById("horarioEvento").value = "";
+            document.getElementById("localEvento").value = "";
+
+            valorBaseAtual = null;
+            valorUpgradesAtual = 0;
+            valorTotalAtual = null;
+
+            limparUpgrades();
+
+            reiniciarFormulario();
+        }
+        function adicionarRegistroPeloVideo() {
+
+            const indice =
+                upgradesSelecionados.findIndex(function (item) {
+
+                    return item.nome ===
+                        "Registro Profissional do Evento";
+
+                });
+
+            if (indice === -1) {
+
+                upgradesSelecionados.push({
+
+                    nome: "Registro Profissional do Evento",
+
+                    valor: 600
+
+                });
+
+            } else {
+
+                mostrarToast(
+                    "ℹ️ Registro profissional já está incluído"
+                );
+
+                fecharAfterMovie();
+
+                return;
+            }
+
+            fecharAfterMovie();
+
+            const modalUpgradesAberto =
+                document
+                    .getElementById("modalUpgrades")
+                    .classList
+                    .contains("ativo");
+
+            if (modalUpgradesAberto) {
+
+                atualizarLinhaUpgrades();
+
+                valorUpgradesAtual =
+                    calcularTotalUpgrades();
+
+                valorTotalAtual =
+                    valorBaseAtual + valorUpgradesAtual;
+
+                document.getElementById(
+                    "valorOrcamento"
+                ).innerText =
+                    formatarMoeda(valorTotalAtual);
+
+                atualizarWhatsapp();
+
+                fecharModalUpgrades();
+
+                mostrarToast(
+                    "📸 Registro profissional adicionado ao orçamento"
+                );
+
+                return;
+            }
+
+            esconderEtapa(
+                document.getElementById("etapaUpgradeParticular")
+            );
+
+            setTimeout(function () {
+
+                mostrarEtapa(
+                    document.getElementById("etapaDadosEvento")
+                );
+
+            }, 300);
+        }
+        function mostrarToast(mensagem) {
+
+            const toast =
+                document.getElementById("toastSucesso");
+
+            toast.innerText = mensagem;
+
+            toast.classList.add("ativo");
+
+            setTimeout(function () {
+
+                toast.classList.remove("ativo");
+
+            }, 2500);
+        }
+        function gerarListaUpgradesPDF() {
+
+            if (upgradesSelecionados.length === 0) {
+                return "<p>Nenhum adicional selecionado.</p>";
+            }
+
+            let html = "<ul>";
+
+            upgradesSelecionados.forEach(function (item) {
+
+                html +=
+                    "<li>" +
+                    item.nome +
+                    " - " +
+                    formatarMoeda(item.valor) +
+                    "</li>";
+
+            });
+
+            html += "</ul>";
+
+            return html;
+        }
+        function gerarPDFProposta() {
+
+            alert(
+                "Função de PDF temporariamente desativada."
+            );
+
+        }
+
+    </script>
+    <div id="toastSucesso" class="toast-sucesso">
+        📸 Registro profissional adicionado ao orçamento
+    </div>
+</body>
+
+</html>
