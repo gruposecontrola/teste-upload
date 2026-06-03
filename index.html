@@ -911,6 +911,57 @@
             }
         }
 
+
+
+        /* =====================================================
+           ESCALA GLOBAL RESPONSIVA
+           Simula um zoom visual menor sem alterar o fluxo interno
+           ===================================================== */
+        :root {
+            --site-scale: 0.55;
+        }
+
+        body {
+            zoom: var(--site-scale);
+            width: calc(100% / var(--site-scale));
+            min-height: calc(100vh / var(--site-scale));
+        }
+
+        .hero,
+        .etapa {
+            min-height: calc(100vh / var(--site-scale));
+        }
+
+        .modal-upgrades,
+        .modal-info {
+            width: calc(100vw / var(--site-scale));
+            height: calc(100vh / var(--site-scale));
+            right: auto;
+            bottom: auto;
+        }
+
+        @media (max-width: 900px) {
+            :root {
+                --site-scale: 0.62;
+            }
+        }
+
+        @media (max-width: 600px) {
+            :root {
+                --site-scale: 0.70;
+            }
+
+            .instagram-text {
+                display: none;
+            }
+        }
+
+        @media (max-width: 390px) {
+            :root {
+                --site-scale: 0.76;
+            }
+        }
+
     </style>
 
 </head>
