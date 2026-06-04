@@ -3243,118 +3243,56 @@
 
             return html;
         }
-        function gerarPDFProposta() {
+function gerarPDFProposta() {
 
-            // =========================
-            // DADOS DO EVENTO
-            // =========================
+    const upgrades = [];
 
-            document.getElementById("pdfCliente").textContent =
-                document.getElementById("nomeContratante").value || "-";
+    upgradesSelecionados.forEach(function(item){
 
-            document.getElementById("pdfDataEvento").textContent =
-                document.getElementById("dataEvento").value || "-";
+        upgrades.push(item.nome);
 
-            document.getElementById("pdfHorario").textContent =
-                document.getElementById("horarioEvento").value || "-";
+    });
 
-            document.getElementById("pdfLocal").textContent =
-                document.getElementById("localEvento").value || "-";
+    localStorage.setItem(
+        "propostaGrupoSeControla",
+        JSON.stringify({
 
-            document.getElementById("pdfPerfil").textContent =
-                respostas.perfil || "-";
+            cliente:
+                respostas.dadosEvento.nome || "",
 
-            document.getElementById("pdfDuracao").textContent =
-                respostas.tempo || "-";
+            data:
+                formatarDataBR(
+                    respostas.dadosEvento.data
+                ),
 
-            document.getElementById("pdfSom").textContent =
-                respostas.som || "-";
+            horario:
+                respostas.dadosEvento.horario || "",
 
+            local:
+                respostas.dadosEvento.local || "",
 
-            // =========================
-            // UPGRADES
-            // =========================
+            duracao:
+                respostas.tempo || "",
 
-            const listaUpgrades =
-                document.getElementById("pdfUpgrades");
+            som:
+                respostas.som || "",
 
-            listaUpgrades.innerHTML = "";
+            upgrades,
 
-            if (
-                !upgradesSelecionados ||
-                upgradesSelecionados.length === 0
-            ) {
+            valor:
+                formatarMoeda(
+                    valorTotalAtual
+                )
 
-                listaUpgrades.innerHTML =
-                    "<li>Nenhum serviço adicional selecionado</li>";
+        })
+    );
 
-            } else {
+    window.open(
+        "proposta.html",
+        "_blank"
+    );
 
-                upgradesSelecionados.forEach(upgrade => {
-
-                    const li =
-                        document.createElement("li");
-
-                    li.textContent =
-                        upgrade.nome;
-
-                    listaUpgrades.appendChild(li);
-
-                });
-
-            }
-
-
-            // =========================
-            // VALOR FINAL
-            // =========================
-
-            document.getElementById("pdfValorTotal").textContent =
-                valorTotalAtual.toLocaleString(
-                    "pt-BR",
-                    {
-                        style: "currency",
-                        currency: "BRL"
-                    }
-                );
-
-
-            // =========================
-            // GERAR PDF
-            // =========================
-
-            const elemento =
-                document.getElementById("propostaPDF");
-
-            elemento.style.display = "block";
-
-            html2pdf()
-                .set({
-                    margin: 10,
-                    filename: "Proposta-Grupo-Se-Controla.pdf",
-                    image: {
-                        type: "jpeg",
-                        quality: 1
-                    },
-                    html2canvas: {
-                        scale: 2
-                    },
-                    jsPDF: {
-                        unit: "mm",
-                        format: "a4",
-                        orientation: "portrait"
-                    }
-                })
-                .from(elemento)
-                .save()
-                .then(() => {
-
-                    elemento.style.display = "none";
-
-                });
-
-        }
-
+}
     </script>
     <div id="toastSucesso" class="toast-sucesso">
         📸 Registro profissional adicionado ao orçamento
@@ -3401,6 +3339,7 @@
         </div>
 
     </div>
+    
 </body>
 
 </html>
