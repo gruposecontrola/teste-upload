@@ -10,7 +10,6 @@
     <title>Grupo Se Controla</title>
 
     <style>
-
         * {
             margin: 0;
             padding: 0;
@@ -1204,7 +1203,6 @@
                 margin-top: 26px;
             }
         }
-
     </style>
 
 </head>
@@ -1604,30 +1602,38 @@
                 Para confirmar disponibilidade, detalhes técnicos e contratação, fale conosco pelo WhatsApp.
             </p>
 
-            <div class="acoes-funil">
+            <div class="acoes-orcamento">
 
-                <button class="btn-acao btn-upgrade" id="btnAbrirUpgrades" onclick="abrirModalUpgrades()"
-                    style="display:none;">
-                    Adicionar upgrades
-                </button>
-
-                <a href="#" target="_blank" class="btn-acao btn-whatsapp" id="btnWhatsapp">
+                <a href="#" target="_blank" class="btn-acao btn-whatsapp btn-principal" id="btnWhatsapp">
                     Falar no WhatsApp
                 </a>
-                <button class="btn-acao btn-pdf" onclick="gerarPDFProposta()">
-                    📄 Baixar proposta em PDF
-                </button>
-                <button class="btn-acao" onclick="voltarDoOrcamento()">
-                    ← Voltar
-                </button>
 
-                <button class="btn-acao" onclick="reiniciarFormulario()">
-                    ↺ Reiniciar
-                </button>
+                <div class="linha-secundaria">
+
+                    <button class="btn-acao btn-upgrade" id="btnAbrirUpgrades" onclick="abrirModalUpgrades()"
+                        style="display:none;">
+                        Adicionar upgrades
+                    </button>
+
+                    <button class="btn-acao btn-pdf" onclick="gerarPDFProposta()">
+                        📄 Baixar proposta em PDF
+                    </button>
+
+                </div>
+
+                <div class="linha-navegacao">
+
+                    <button class="btn-acao" onclick="voltarDoOrcamento()">
+                        ← Voltar
+                    </button>
+
+                    <button class="btn-acao" onclick="reiniciarFormulario()">
+                        ↺ Reiniciar
+                    </button>
+
+                </div>
 
             </div>
-
-        </div>
 
     </section>
 
