@@ -321,6 +321,73 @@ window.addEventListener("message", (event) => {
 });
 
 </script>
+<script>
+
+window.addEventListener("load", function() {
+
+    const dados =
+        JSON.parse(
+            localStorage.getItem(
+                "propostaGrupoSeControla"
+            )
+        );
+
+    if (!dados) {
+        return;
+    }
+
+    document.getElementById("pdfCliente").textContent =
+        dados.cliente || "-";
+
+    document.getElementById("pdfDataEvento").textContent =
+        dados.data || "-";
+
+    document.getElementById("pdfHorario").textContent =
+        dados.horario || "-";
+
+    document.getElementById("pdfLocal").textContent =
+        dados.local || "-";
+
+    document.getElementById("pdfDuracao").textContent =
+        dados.duracao || "-";
+
+    document.getElementById("pdfSom").textContent =
+        dados.som || "-";
+
+    document.getElementById("pdfValorTotal").textContent =
+        dados.valor || "R$ 0,00";
+
+    const lista =
+        document.getElementById("pdfUpgrades");
+
+    lista.innerHTML = "";
+
+    if (
+        !dados.upgrades ||
+        dados.upgrades.length === 0
+    ) {
+
+        lista.innerHTML =
+            "<li>Nenhum serviço adicional selecionado</li>";
+
+    } else {
+
+        dados.upgrades.forEach(function(item){
+
+            const li =
+                document.createElement("li");
+
+            li.textContent = item;
+
+            lista.appendChild(li);
+
+        });
+
+    }
+
+});
+
+</script>
 </body>
 
 </html>
