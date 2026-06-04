@@ -472,6 +472,33 @@
             transform: scale(1.03);
         }
 
+        .estrutura-imagem-wrapper {
+            position: relative;
+            display: inline-block;
+        }
+
+        .selo-mapa-palco {
+            position: absolute;
+            bottom: 14px;
+            right: 14px;
+
+            background: rgba(22, 58, 99, .92);
+
+            color: white;
+
+            padding: 8px 12px;
+
+            border-radius: 999px;
+
+            font-size: 12px;
+
+            font-weight: 800;
+
+            pointer-events: none;
+
+            box-shadow: 0 6px 18px rgba(0, 0, 0, .18);
+        }
+
         /* ========================= */
         /* ORÇAMENTO */
         /* ========================= */
@@ -1435,8 +1462,16 @@
                         espaços reduzidos e para manter a banda mais próxima dos convidados.
                     </p>
 
-                    <img src="som-reduzido.png" alt="Estrutura Reduzida" class="imagem-estrutura"
-                        onclick="abrirMapaPalco('reduzido')">
+                    <div class="estrutura-imagem-wrapper">
+
+                        <img src="som-reduzido.png" alt="Estrutura Reduzida" class="imagem-estrutura"
+                            onclick="abrirMapaPalco('reduzido')">
+
+                        <div class="selo-mapa-palco">
+                            🔍 Ver mapa de palco
+                        </div>
+
+                    </div>
                     <div class="estrutura-acoes">
 
                         <button class="btn-acao btn-whatsapp" onclick="selecionarSomParticular('Estrutura Reduzida')">
@@ -1461,8 +1496,16 @@
                         ideal para espaços amplos que exigem maior potência e alcance.
                     </p>
 
-                    <img src="som-completo.png" alt="Estrutura Completa" class="imagem-estrutura"
-                        onclick="abrirMapaPalco('completo')">
+                    <div class="estrutura-imagem-wrapper">
+
+                        <img src="som-completo.png" alt="Estrutura Completa" class="imagem-estrutura"
+                            onclick="abrirMapaPalco('completo')">
+
+                        <div class="selo-mapa-palco">
+                            🔍 Ver mapa de palco
+                        </div>
+
+                    </div>
                     <div class="estrutura-acoes">
 
                         <button class="btn-acao btn-whatsapp" onclick="selecionarSomParticular('Estrutura Completa')">
@@ -2641,7 +2684,6 @@
                 "Upgrades selecionados:%0A" + gerarTextoUpgradesWhatsapp() +
                 "%0AValor dos upgrades: " + formatarMoeda(calcularTotalUpgrades()) + "%0A" +
                 "Valor estimado total: " + formatarMoeda(valorTotalAtual) + "%0A%0A" +
-                "Observação: os serviços adicionais são terceirizados e os valores podem sofrer alterações conforme disponibilidade, local do evento, necessidades técnicas e fornecedor disponível.%0A%0A" +
                 "Gostaria de prosseguir com o orçamento.";
 
             document.getElementById("btnWhatsapp").href =
