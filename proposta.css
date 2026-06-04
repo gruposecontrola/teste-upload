@@ -135,9 +135,6 @@ body {
 
     inset: 0;
 
-    background-image:
-        url("noise.png");
-
     opacity: .04;
 
     mix-blend-mode: screen;
