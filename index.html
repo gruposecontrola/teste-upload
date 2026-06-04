@@ -520,6 +520,39 @@
         /* ========================= */
         /* MODAIS */
         /* ========================= */
+        .indicador-rolagem {
+            margin-bottom: 12px;
+
+            padding: 10px 14px;
+
+            border-radius: 14px;
+
+            background: #eef6ff;
+
+            color: #163a63;
+
+            font-size: 14px;
+
+            font-weight: 800;
+
+            text-align: center;
+
+            animation: pulsarRolagem 1.8s infinite;
+        }
+
+        @keyframes pulsarRolagem {
+
+            0%,
+            100% {
+                opacity: .6;
+                transform: translateY(0);
+            }
+
+            50% {
+                opacity: 1;
+                transform: translateY(3px);
+            }
+        }
 
         .modal-upgrades,
         .modal-info {
@@ -1764,17 +1797,14 @@
                 Registro Profissional do Evento
             </h2>
 
+            <div class="indicador-rolagem">
+                ⬇ Veja o vídeo e role para conhecer o pacote completo
+            </div>
+
             <video class="modal-video" controls preload="metadata">
                 <source src="aftermovie-divulgacao.mp4" type="video/mp4">
                 Seu navegador não conseguiu reproduzir este vídeo.
             </video>
-            <video class="modal-video" controls preload="metadata">
-                ...
-            </video>
-
-            <div class="indicador-rolagem">
-                ⬇ Role para ver os detalhes do pacote
-            </div>
 
             <p class="observacao">
             <p class="observacao">
