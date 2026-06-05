@@ -879,3 +879,48 @@ h1 {
 
     opacity: .9;
 }
+/* ========================= */
+/* BOTÃO PDF */
+/* ========================= */
+
+#btnBaixarPDF {
+
+    position: fixed;
+
+    top: 20px;
+
+    right: 20px;
+
+    z-index: 99999;
+
+    background: #163a63;
+
+    color: white;
+
+    border: none;
+
+    padding: 14px 22px;
+
+    border-radius: 12px;
+
+    font-size: 15px;
+
+    font-weight: 700;
+
+    cursor: pointer;
+
+    box-shadow:
+        0 10px 25px rgba(0,0,0,.25);
+
+    transition: .25s;
+}
+
+#btnBaixarPDF:hover {
+
+    transform: translateY(-2px);
+}
+
+.pdf-gerando #btnBaixarPDF {
+
+    display: none;
+}
