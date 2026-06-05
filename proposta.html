@@ -13,10 +13,13 @@
 
     <link rel="stylesheet" href="proposta.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
 </head>
 
 <body>
-
+    <button id="btnBaixarPDF">
+        📄 Baixar PDF
+    </button>
     <section class="pagina capa">
 
         <!-- MÚSICOS AO FUNDO -->
@@ -195,9 +198,23 @@
 
             <p>
                 Formas de pagamento:
-                PIX ou transferência bancária.
+                PIX, transferência bancária ou cartão de crédito.
             </p>
 
+            <br>
+
+            <p>
+                Cartão de crédito parcelado em até 12x.
+            </p>
+
+            <br>
+
+            <p>
+                Em pagamentos via cartão será acrescida a taxa da operadora da maquininha.
+                Caso deseje, podemos realizar uma simulação prévia do valor parcelado.
+            </p>
+
+        </div>
         </div>
 
         <h2>
@@ -433,6 +450,72 @@
             }
 
         });
+
+    </script>
+    <script>
+
+        document
+            .getElementById("btnBaixarPDF")
+            .addEventListener("click", gerarPDF);
+
+        function gerarPDF() {
+
+            document.body.classList.add("pdf-gerando");
+
+            const cliente =
+                document.getElementById("pdfCliente")
+                    .textContent
+                    .trim();
+
+            const nomeArquivo =
+                cliente && cliente !== "-"
+                    ? "Proposta - " + cliente + ".pdf"
+                    : "Proposta Grupo Se Controla.pdf";
+
+            const elemento =
+                document.body;
+
+            const opcoes = {
+
+                margin: 0,
+
+                filename: nomeArquivo,
+
+                image: {
+                    type: "jpeg",
+                    quality: 1
+                },
+
+                html2canvas: {
+                    scale: 2,
+                    useCORS: true
+                },
+
+                jsPDF: {
+                    unit: "mm",
+                    format: "a4",
+                    orientation: "portrait"
+                },
+
+                pagebreak: {
+                    mode: ["css", "legacy"]
+                }
+
+            };
+
+            html2pdf()
+                .from(elemento)
+                .set(opcoes)
+                .save()
+                .then(() => {
+
+                    document.body.classList.remove(
+                        "pdf-gerando"
+                    );
+
+                });
+
+        }
 
     </script>
 </body>
