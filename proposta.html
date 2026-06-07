@@ -20,273 +20,274 @@
     <button id="btnBaixarPDF">
         📄 Baixar PDF
     </button>
-    <section class="pagina capa">
+    <div id="pdfCompleto">
+        <section class="pagina capa">
 
-        <!-- MÚSICOS AO FUNDO -->
+            <!-- MÚSICOS AO FUNDO -->
 
-        <img src="lucas.png" class="bg-musico bg-lucas">
-        <img src="arthur.png" class="bg-musico bg-arthur">
+            <img src="lucas.png" class="bg-musico bg-lucas">
+            <img src="arthur.png" class="bg-musico bg-arthur">
 
-        <img src="angelo.png" class="bg-musico bg-angelo">
-        <img src="matheus.png" class="bg-musico bg-matheus">
+            <img src="angelo.png" class="bg-musico bg-angelo">
+            <img src="matheus.png" class="bg-musico bg-matheus">
 
-        <img src="pedrinho.png" class="bg-musico bg-pedrinho">
-        <img src="haddad.png" class="bg-musico bg-haddad">
+            <img src="pedrinho.png" class="bg-musico bg-pedrinho">
+            <img src="haddad.png" class="bg-musico bg-haddad">
 
-        <!-- LUZES -->
+            <!-- LUZES -->
 
-        <div class="luz luz-esquerda"></div>
-        <div class="luz luz-direita"></div>
-        <div class="sombra-esquerda"></div>
-        <div class="sombra sombra-direita-topo"></div>
-        <div class="sombra sombra-direita-baixo"></div>
+            <div class="luz luz-esquerda"></div>
+            <div class="luz luz-direita"></div>
+            <div class="sombra-esquerda"></div>
+            <div class="sombra sombra-direita-topo"></div>
+            <div class="sombra sombra-direita-baixo"></div>
 
-        <!-- LOGO -->
+            <!-- LOGO -->
 
-        <img src="logo.PNG" alt="Grupo Se Controla" class="logo">
+            <img src="logo.PNG" alt="Grupo Se Controla" class="logo">
 
-        <!-- TÍTULO -->
+            <!-- TÍTULO -->
 
-        <h1 class="titulo-capa">
-            PROPOSTA
-            <span>COMERCIAL</span>
-        </h1>
+            <h1 class="titulo-capa">
+                PROPOSTA
+                <span>COMERCIAL</span>
+            </h1>
 
-        <!-- SUBTÍTULO -->
+            <!-- SUBTÍTULO -->
 
-        <p class="subtitulo">
-            Soluções musicais para eventos sociais e corporativos
-        </p>
-        <div class="linha-glow"></div>
-        <!-- FOTO PRINCIPAL -->
+            <p class="subtitulo">
+                Soluções musicais para eventos sociais e corporativos
+            </p>
+            <div class="linha-glow"></div>
+            <!-- FOTO PRINCIPAL -->
 
-        <img src="banda.png" alt="Grupo Se Controla" class="foto-banda">
+            <img src="banda.png" alt="Grupo Se Controla" class="foto-banda">
 
-        <!-- RODAPÉ -->
+            <!-- RODAPÉ -->
 
-        <div class="rodape-capa">
+            <div class="rodape-capa">
 
-            <div class="info-rodape">
-                <i class="fa-solid fa-location-dot"></i>
-                Brasília - DF
+                <div class="info-rodape">
+                    <i class="fa-solid fa-location-dot"></i>
+                    Brasília - DF
+                </div>
+
+                <div class="divisor"></div>
+
+                <a href="#" id="whatsappRodape" target="_blank" class="info-rodape link-rodape">
+                    <i class="fa-brands fa-whatsapp"></i>
+                    (61) 98493-8473
+                </a>
+
+                <div class="divisor"></div>
+
+                <a href="https://www.instagram.com/gruposecontrola/" target="_blank" class="info-rodape link-rodape">
+                    <i class="fa-brands fa-instagram"></i>
+                    @gruposecontrola
+                </a>
+
             </div>
 
-            <div class="divisor"></div>
+        </section>
+        <section class="pagina pagina-detalhes">
 
-            <a href="#" id="whatsappRodape" target="_blank" class="info-rodape link-rodape">
-                <i class="fa-brands fa-whatsapp"></i>
-                (61) 98493-8473
-            </a>
+            <h2>
+                Informações do Evento
+            </h2>
 
-            <div class="divisor"></div>
+            <div class="card">
 
-            <a href="https://www.instagram.com/gruposecontrola/" target="_blank" class="info-rodape link-rodape">
-                <i class="fa-brands fa-instagram"></i>
-                @gruposecontrola
-            </a>
+                <div class="linha">
+                    <span>Cliente</span>
+                    <strong id="pdfCliente">
+                        Nome do Cliente
+                    </strong>
+                </div>
 
-        </div>
+                <div class="linha">
+                    <span>Data do Evento</span>
+                    <strong id="pdfDataEvento">
+                        --
+                    </strong>
+                </div>
 
-    </section>
-    <section class="pagina pagina-detalhes">
+                <div class="linha">
+                    <span>Horário</span>
+                    <strong id="pdfHorario">
+                        --
+                    </strong>
+                </div>
 
-        <h2>
-            Informações do Evento
-        </h2>
+                <div class="linha">
+                    <span>Local</span>
+                    <strong id="pdfLocal">
+                        --
+                    </strong>
+                </div>
 
-        <div class="card">
+                <div class="linha">
+                    <span>Duração</span>
+                    <strong id="pdfDuracao">
+                        --
+                    </strong>
+                </div>
 
-            <div class="linha">
-                <span>Cliente</span>
-                <strong id="pdfCliente">
-                    Nome do Cliente
-                </strong>
+                <div class="linha">
+                    <span>Estrutura de Som</span>
+                    <strong id="pdfSom">
+                        --
+                    </strong>
+                </div>
+                <div class="linha">
+                    <span>Contratação Musical</span>
+                    <strong id="pdfValorBanda">
+                        R$ 0,00
+                    </strong>
+                </div>
             </div>
 
-            <div class="linha">
-                <span>Data do Evento</span>
-                <strong id="pdfDataEvento">
-                    --
-                </strong>
-            </div>
+            <h2>
+                Serviços Adicionais
+            </h2>
 
-            <div class="linha">
-                <span>Horário</span>
-                <strong id="pdfHorario">
-                    --
-                </strong>
-            </div>
+            <div class="card">
 
-            <div class="linha">
-                <span>Local</span>
-                <strong id="pdfLocal">
-                    --
-                </strong>
-            </div>
+                <ul id="pdfUpgrades">
 
-            <div class="linha">
-                <span>Duração</span>
-                <strong id="pdfDuracao">
-                    --
-                </strong>
-            </div>
+                    <li>
+                        Nenhum serviço adicional selecionado
+                    </li>
 
-            <div class="linha">
-                <span>Estrutura de Som</span>
-                <strong id="pdfSom">
-                    --
-                </strong>
-            </div>
-            <div class="linha">
-                <span>Contratação Musical</span>
-                <strong id="pdfValorBanda">
-                    R$ 0,00
-                </strong>
-            </div>
-        </div>
+                </ul>
 
-        <h2>
-            Serviços Adicionais
-        </h2>
-
-        <div class="card">
-
-            <ul id="pdfUpgrades">
-
-                <li>
-                    Nenhum serviço adicional selecionado
-                </li>
-
-            </ul>
-
-            <div id="pdfTotalUpgrades" style="
+                <div id="pdfTotalUpgrades" style="
         margin-top:15px;
         font-weight:700;
         color:#163a63;
      ">
-                Total dos adicionais: R$ 0,00
+                    Total dos adicionais: R$ 0,00
+                </div>
+
             </div>
 
-        </div>
+            <div class="investimento">
 
-        <div class="investimento">
+                <span>
+                    Investimento Total
+                </span>
 
-            <span>
-                Investimento Total
-            </span>
+                <h3 id="pdfValorTotal">
+                    R$ 0,00
+                </h3>
 
-            <h3 id="pdfValorTotal">
-                R$ 0,00
-            </h3>
+            </div>
 
-        </div>
+        </section>
+        <section class="pagina pagina-termos">
 
-    </section>
-    <section class="pagina pagina-termos">
+            <h2>
+                Forma de Pagamento
+            </h2>
 
-        <h2>
-            Forma de Pagamento
-        </h2>
+            <div class="card">
 
-        <div class="card">
+                <p>
+                    O pagamento da apresentação será realizado imediatamente após o término do evento.
+                </p>
 
-            <p>
-                O pagamento da apresentação será realizado imediatamente após o término do evento.
-            </p>
+                <br>
 
-            <br>
+                <p>
+                    Formas de pagamento:
+                    PIX, transferência bancária ou cartão de crédito.
+                </p>
 
-            <p>
-                Formas de pagamento:
-                PIX, transferência bancária ou cartão de crédito.
-            </p>
+                <br>
 
-            <br>
+                <p>
+                    Cartão de crédito parcelado em até 12x.
+                </p>
 
-            <p>
-                Cartão de crédito parcelado em até 12x.
-            </p>
+                <br>
 
-            <br>
+                <p>
+                    Em pagamentos via cartão será acrescida a taxa da operadora da maquininha.
+                    Caso deseje, podemos realizar uma simulação prévia do valor parcelado.
+                </p>
 
-            <p>
-                Em pagamentos via cartão será acrescida a taxa da operadora da maquininha.
-                Caso deseje, podemos realizar uma simulação prévia do valor parcelado.
-            </p>
+            </div>
+    </div>
 
-        </div>
-        </div>
+    <h2>
+        Observações sobre Serviços Adicionais
+    </h2>
 
-        <h2>
-            Observações sobre Serviços Adicionais
-        </h2>
+    <div class="card">
 
-        <div class="card">
+        <p>
+            Os serviços adicionais são prestados por parceiros terceirizados independentes.
+        </p>
 
-            <p>
-                Os serviços adicionais são prestados por parceiros terceirizados independentes.
-            </p>
+        <br>
 
-            <br>
+        <p>
+            Alguns fornecedores poderão solicitar pagamento antecipado de até 50% do valor contratado para
+            confirmação da reserva da data.
+        </p>
 
-            <p>
-                Alguns fornecedores poderão solicitar pagamento antecipado de até 50% do valor contratado para
-                confirmação da reserva da data.
-            </p>
+        <br>
 
-            <br>
+        <p>
+            Condições de pagamento, prazos e demais informações serão apresentadas ao cliente no momento da
+            contratação de cada serviço.
+        </p>
 
-            <p>
-                Condições de pagamento, prazos e demais informações serão apresentadas ao cliente no momento da
-                contratação de cada serviço.
-            </p>
+    </div>
 
-        </div>
+    <h2>
+        Termos e Condições
+    </h2>
 
-        <h2>
-            Termos e Condições
-        </h2>
+    <div class="card">
 
-        <div class="card">
+        <ul>
 
-            <ul>
+            <li>
+                Este orçamento contempla serviços realizados exclusivamente no Distrito Federal.
+            </li>
 
-                <li>
-                    Este orçamento contempla serviços realizados exclusivamente no Distrito Federal.
-                </li>
+            <li>
+                A reserva da data está sujeita à confirmação de disponibilidade.
+            </li>
 
-                <li>
-                    A reserva da data está sujeita à confirmação de disponibilidade.
-                </li>
+            <li>
+                Alterações de horário, duração da apresentação ou estrutura contratada poderão gerar reajustes.
+            </li>
 
-                <li>
-                    Alterações de horário, duração da apresentação ou estrutura contratada poderão gerar reajustes.
-                </li>
+            <li>
+                Valores e condições apresentados nesta proposta poderão ser atualizados em caso de alterações
+                posteriores da contratação.
+            </li>
 
-                <li>
-                    Valores e condições apresentados nesta proposta poderão ser atualizados em caso de alterações
-                    posteriores da contratação.
-                </li>
+        </ul>
 
-            </ul>
+    </div>
 
-        </div>
+    <div class="assinatura">
 
-        <div class="assinatura">
+        <h3>
+            Grupo Se Controla
+        </h3>
 
-            <h3>
-                Grupo Se Controla
-            </h3>
+        <p>
+            Instagram: @gruposecontrola
+        </p>
 
-            <p>
-                Instagram: @gruposecontrola
-            </p>
+        <p>
+            WhatsApp: (61) 98493-8473
+        </p>
 
-            <p>
-                WhatsApp: (61) 98493-8473
-            </p>
-
-        </div>
+    </div>
 
     </section>
     <script>
@@ -473,7 +474,7 @@
                     : "Proposta Grupo Se Controla.pdf";
 
             const elemento =
-                document.body;
+    document.querySelector(".capa");
 
             const opcoes = {
 
@@ -487,8 +488,9 @@
                 },
 
                 html2canvas: {
-                    scale: 2,
-                    useCORS: true
+                    scale: 1.5,
+                    useCORS: true,
+                    scrollY: 0
                 },
 
                 jsPDF: {
@@ -518,6 +520,7 @@
         }
 
     </script>
+    </div>
 </body>
 
 </html>
