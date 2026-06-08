@@ -22,15 +22,18 @@ body {
 
     min-height: 297mm;
 
-    margin: 0;
+    margin: 20px auto;
 
     background: white;
 
     padding: 30px;
 
-    border-radius: 0;
+    border-radius: 24px;
 
     overflow: hidden;
+    page-break-after: always;
+
+    break-after: page;
 }
 
 /* ========================= */
